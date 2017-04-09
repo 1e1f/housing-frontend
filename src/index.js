@@ -21,7 +21,6 @@ export default function createRoutes(store) {
         }));
 
         const renderRoute = loadModule(cb);
-
         getModule
           .then((component) => {
             injectAsyncReducer('app', require('./state/app').default);

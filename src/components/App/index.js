@@ -5,6 +5,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 
+import HousingMap from '../HousingMap';
+
 const Container = styled.div`
   min-height: 100%;
   margin: 0 auto;
@@ -17,6 +19,7 @@ function App(props) {
     <Container>
       <Header />
       {React.Children.toArray(props.children)}
+      <HousingMap />
     </Container>
   );
 }
