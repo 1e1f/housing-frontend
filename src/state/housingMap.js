@@ -5,16 +5,14 @@ export const CHANGE_WAGES = 'CHANGE_WAGES';
 export const INITIAL_STATE = {
   stories: [],
   controls: {
-    wages: 10
-  }
+    wages: 10,
+  },
 };
 
-export const changeWages = (payload) => {
-  return {
-    type: CHANGE_WAGES,
-    payload,
-  }
-}
+export const changeWages = payload => ({
+  type: CHANGE_WAGES,
+  payload,
+});
 
 export const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

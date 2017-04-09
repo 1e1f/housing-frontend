@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
-
-import { assocPath } from 'ramda';
-
 
 import { changeWages } from '../../state/housingMap';
 
@@ -11,16 +8,19 @@ function controls(props) {
   const { wages, onChange } = props;
   return (
     <div className="slider-container">
-      <Slider min={wages.min}
+      <Slider
+        min={wages.min}
         max={wages.max}
         value={wages.value}
-        onChange={onChange} />
+        onChange={onChange}
+      />
     </div>
-  )
+  );
 }
 
 controls.propTypes = {
-  wages: React.PropTypes.objectOf(React.PropTypes.number)
+  wages: PropTypes.objectOf(React.PropTypes.number).isRequired,
+  onChange: PropTypes.function.isRequired,
 };
 
 function mapStateToProps(state, own) {
@@ -29,7 +29,7 @@ function mapStateToProps(state, own) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onChange: (val) => dispatch(changeWages(val))
+    onChange: val => dispatch(changeWages(val)),
   };
 }
 
