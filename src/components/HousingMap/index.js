@@ -1,16 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { assocPath } from 'ramda';
+import isClient from '@hackoregon/component-library/lib/utils/isClient';
 import LeafletMap from '@hackoregon/component-library/lib/LeafletMap/LeafletMap';
-
 import Controls from './controls';
 
 import './styles.css';
 
 function housingMap({ controls, map }) {
   return (<div className="housing-map-container">
-    <LeafletMap {...map} >
+    {isClient && <LeafletMap {...map} >
       <div />
-    </LeafletMap>
+    </LeafletMap>}
     <Controls {...controls} />
   </div>
   );
@@ -18,29 +20,27 @@ function housingMap({ controls, map }) {
 
 const initialState = { controls: { wages: 10 } };
 
-function mapStateToProps(state = initialState) {
-  const props = {
-    controls: {
-      wages: {
-        min: 7,
-        max: 50,
-        value: state.housingMap.controls.wages,
-      },
-      map: {
-        width: 600,
-        height: 400,
-        zoom: 5,
-        center: [20, 10],
-        scrollWheelZoom: true,
-      },
+const defaultProps = {
+  controls: {
+    wages: {
+      min: 7,
+      max: 50,
+      value: 10,
     },
-  };
-  return props;
+  },
+  map: {
+    width: 600,
+    height: 400,
+    zoom: 5,
+    center: [20, 10],
+    scrollWheelZoom: true,
+  },
+};
+
+function mapStateToProps(state = initialState) {
+  return assocPath(['controls', 'wages', 'value'], state.housingMap.controls.wages, defaultProps);
 }
 
-housingMap.propTypes = {
-  controls: React.PropTypes.object.isRequired,
-  map: React.PropTypes.object.isRequired,
-};
+housingMap.propTypes = PropTypes.shape(defaultProps).isRequired;
 
 export default connect(mapStateToProps)(housingMap);

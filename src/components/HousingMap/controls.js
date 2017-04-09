@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Slider from '@hackoregon/component-library/lib/Slider/Slider';
 
@@ -19,8 +20,8 @@ function controls(props) {
 }
 
 controls.propTypes = {
-  wages: PropTypes.objectOf(React.PropTypes.number).isRequired,
-  onChange: PropTypes.function.isRequired,
+  wages: PropTypes.objectOf(PropTypes.number).isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, own) {

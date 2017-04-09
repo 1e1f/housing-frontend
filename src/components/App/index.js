@@ -2,6 +2,7 @@
 // This should probably be the core component, containing, nav etc
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Header from '@hackoregon/component-library/lib/Navigation/Header';
 
@@ -30,7 +31,7 @@ App.defaultProps = {
 };
 
 App.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 export default App;
